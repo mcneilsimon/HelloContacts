@@ -14,6 +14,7 @@
 		2D7E6D0020A2160C00B2545D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D7E6CFE20A2160C00B2545D /* LaunchScreen.storyboard */; };
 		2D7E6D0820A2168700B2545D /* HCContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0720A2168700B2545D /* HCContact.swift */; };
 		2D7E6D0A20A21BB900B2545D /* ContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */; };
+		2D7E6D0E20A237DD00B2545D /* ContactsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2D7E6D0120A2160C00B2545D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D7E6D0720A2168700B2545D /* HCContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCContact.swift; sourceTree = "<group>"; };
 		2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewCell.swift; sourceTree = "<group>"; };
+		2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCollectionViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				2D7E6CF520A2160800B2545D /* AppDelegate.swift */,
 				2D7E6CF720A2160800B2545D /* ViewController.swift */,
 				2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */,
+				2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */,
 				2D7E6D0720A2168700B2545D /* HCContact.swift */,
 				2D7E6CF920A2160800B2545D /* Main.storyboard */,
 				2D7E6CFC20A2160C00B2545D /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D7E6CF820A2160800B2545D /* ViewController.swift in Sources */,
+				2D7E6D0E20A237DD00B2545D /* ContactsCollectionViewLayout.swift in Sources */,
 				2D7E6D0A20A21BB900B2545D /* ContactCollectionViewCell.swift in Sources */,
 				2D7E6D0820A2168700B2545D /* HCContact.swift in Sources */,
 				2D7E6CF620A2160800B2545D /* AppDelegate.swift in Sources */,

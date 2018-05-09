@@ -22,30 +22,32 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dee-Kj-Vk0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HuG-bq-8hp">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="HuG-bq-8hp">
+                                    <size key="itemSize" width="110" height="160"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="contactCell" id="Bdv-SK-zFI" customClass="ContactCollectionViewCell" customModule="HelloContacts" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="90"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="159"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="110" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="125" height="159"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bxz-BV-ZIQ">
-                                                    <rect key="frame" x="29.5" y="8" width="50" height="50"/>
+                                                    <rect key="frame" x="23.5" y="9" width="78" height="83"/>
                                                     <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="Pgm-46-c74"/>
-                                                        <constraint firstAttribute="height" constant="50" id="pI3-iX-uH2"/>
+                                                        <constraint firstAttribute="width" constant="78" id="Pgm-46-c74"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCF-BG-PX2">
-                                                    <rect key="frame" x="34" y="62" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCF-BG-PX2">
+                                                    <rect key="frame" x="4" y="92" width="117" height="63"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="63" id="o6r-tp-izs"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -54,11 +56,13 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="bxz-BV-ZIQ" firstAttribute="centerX" secondItem="Bdv-SK-zFI" secondAttribute="centerX" id="0qJ-vr-WVg"/>
-                                            <constraint firstItem="nCF-BG-PX2" firstAttribute="centerX" secondItem="Bdv-SK-zFI" secondAttribute="centerX" id="eUk-Wp-6n3"/>
-                                            <constraint firstAttribute="bottom" secondItem="nCF-BG-PX2" secondAttribute="bottom" constant="7" id="vaC-l6-0mm"/>
-                                            <constraint firstItem="bxz-BV-ZIQ" firstAttribute="top" secondItem="Bdv-SK-zFI" secondAttribute="topMargin" id="yl8-5F-q3o"/>
+                                            <constraint firstItem="nCF-BG-PX2" firstAttribute="centerX" secondItem="bxz-BV-ZIQ" secondAttribute="centerX" id="B4a-Le-8HT"/>
+                                            <constraint firstItem="nCF-BG-PX2" firstAttribute="leading" secondItem="Bdv-SK-zFI" secondAttribute="leading" constant="4" id="KVB-xl-wHH"/>
+                                            <constraint firstItem="bxz-BV-ZIQ" firstAttribute="top" secondItem="Bdv-SK-zFI" secondAttribute="topMargin" constant="1" id="NcO-yT-Xxk"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="nCF-BG-PX2" secondAttribute="bottom" constant="-4" id="VLu-Cy-CMI"/>
+                                            <constraint firstItem="nCF-BG-PX2" firstAttribute="top" secondItem="bxz-BV-ZIQ" secondAttribute="bottom" id="mHG-dh-vDA"/>
                                         </constraints>
-                                        <size key="customSize" width="110" height="90"/>
+                                        <size key="customSize" width="125" height="159"/>
                                         <connections>
                                             <outlet property="contactImage" destination="bxz-BV-ZIQ" id="PXC-oq-MOx"/>
                                             <outlet property="nameLabel" destination="nCF-BG-PX2" id="pyw-RB-itX"/>
@@ -83,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="649" y="116"/>
+            <point key="canvasLocation" x="762" y="116"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0xY-Xt-XtZ">

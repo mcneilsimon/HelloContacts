@@ -18,6 +18,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        //Uncomment if you want to use the ContactsCollectionViewLayoutClass
+        //collectionView.collectionViewLayout = ContactsCollectionViewLayout()
         
         //object that will access the user's conctact database
         let store = CNContactStore()
@@ -90,7 +94,8 @@ extension ViewController: UICollectionViewDataSource {
         
         let contact = contacts[indexPath.row]
         
-        cell.nameLabel.text = "\(contact.givenName) \(contact.familyName)"
+        
+        cell.nameLabel.text = "\(contact.givenName)\n\(contact.familyName)"
         
         contact.fetchImageIfNeeded() //sets the image in the HCContact class
         //gets the image property in the HCContact class
@@ -99,6 +104,30 @@ extension ViewController: UICollectionViewDataSource {
         }
         return cell
     }
+}
+
+/* This delegate protocol allows you to implement a few customization points for the layout.
+ For instance, you can dynamically calculate cell sizes or manipulate the cell spacing. */
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    
+    /* Delegate method that we need to implement in order to provide dynamic cell sizes. Simply return a cell size width and height.
+     */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 110, height: 160)
+    }
+    
+    /*
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5.0
+    }*/
+    
+    //creates the spacing between cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        let cellsPerRow: CGFloat = 3
+        let widthReminder = (collectionView.bounds.width - (cellsPerRow-1)).truncatingRemainder(dividingBy: cellsPerRow) / (cellsPerRow-1)
+        return 1 + widthReminder
+    }
+    
 }
 
 
