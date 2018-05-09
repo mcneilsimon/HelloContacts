@@ -116,11 +116,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 110, height: 160)
     }
     
-    /*
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5.0
-    }*/
-    
     //creates the spacing between cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         let cellsPerRow: CGFloat = 3
@@ -129,6 +124,41 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+extension ViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        /* First thing to note is that we can ask UICollectionView for a cell based on the IndexPath. The ccellForItem method returns an
+           optional UICollectionViewCell. There might not be a cell at the requested IndexPath; if this is the case cellForItem returns nil, otherwise
+           a UICollectionView cell instance is returned */
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ContactCollectionViewCell else {return }
+        
+        //The following animation code produces an ease in ease out when a user taps on a contact in the collection view
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+            cell.contactImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }, completion: { finished in
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn], animations: {
+                cell.contactImage.transform = CGAffineTransform.identity
+            }, completion: nil)
+        })
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
