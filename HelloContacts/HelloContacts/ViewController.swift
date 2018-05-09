@@ -131,6 +131,10 @@ extension ViewController: UICollectionViewDelegate {
         /* First thing to note is that we can ask UICollectionView for a cell based on the IndexPath. The ccellForItem method returns an
            optional UICollectionViewCell. There might not be a cell at the requested IndexPath; if this is the case cellForItem returns nil, otherwise
            a UICollectionView cell instance is returned */
+        
+        
+        
+        
         guard let cell = collectionView.cellForItem(at: indexPath) as? ContactCollectionViewCell else {return }
         
         //The following animation code produces an ease in ease out when a user taps on a contact in the collection view
