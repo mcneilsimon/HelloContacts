@@ -135,7 +135,7 @@ extension ViewController: UICollectionViewDelegate {
         
         //The following animation code produces an ease in ease out when a user taps on a contact in the collection view
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
-            cell.contactImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            cell.contactImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }, completion: { finished in
             UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn], animations: {
                 cell.contactImage.transform = CGAffineTransform.identity
