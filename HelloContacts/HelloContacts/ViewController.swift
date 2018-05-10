@@ -43,6 +43,13 @@ class ViewController: UIViewController {
             retrieveContacts(fromStore: store)
         }
         
+        /* Implementing are gesture reconizer, with its target being self. Remember self means that the current instance of our view controller
+            is the object that is called whenever the long-press is detected. The second object is a selector. A selector is roughly the same as
+            a reference to a method. It tells the long-press gesture recognizer that it should call the part between the parentheses on the
+            target that was specified.
+         */
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.recieveLongPress(gestureReconizer:)))
+        collectionView.addGestureRecognizer(longPressRecognizer)
     }
     
     //Responsible for fetching the contacts.
@@ -80,6 +87,33 @@ class ViewController: UIViewController {
                 self.collectionView.reloadData()
             }
         }
+    }
+    
+    @objc func recieveLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        let tappedPoint =  gestureReconizer.location(in: collectionView)
+        
+        /*First asks the collectionView for the index path that it belong to this point (tappedIndexPath). The found index path is then used
+          to find out which cell was tapped (tappedCell) So first it check tappedIndexPath and then tappedCell uses tappedIndexPath if it doesn't
+          produc nil */
+        guard let tappedIndexPath = collectionView.indexPathForItem(at: tappedPoint),
+            let tappedCell = collectionView.cellForItem(at: tappedIndexPath) else { return }
+        
+        let confirmDialog = UIAlertController(title: "Delete This Contact?", message: "Are You Sure You Want To Delete This Contact?", preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
+            self.contacts.remove(at: tappedIndexPath.row)
+            self.collectionView.deleteItems(at: [tappedIndexPath])
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        
+        confirmDialog.addAction(deleteAction)
+        confirmDialog.addAction(cancelAction)
+        
+        if let popOver = confirmDialog.popoverPresentationController {
+            popOver.sourceView = tappedCell
+        }
+        present(confirmDialog, animated: true, completion: nil)
     }
 }
 
@@ -128,13 +162,9 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        /* First thing to note is that we can ask UICollectionView for a cell based on the IndexPath. The ccellForItem method returns an
+        /* First thing to note is that we can ask UICollectionView for a cell based on the IndexPath. The cellForItem method returns an
            optional UICollectionViewCell. There might not be a cell at the requested IndexPath; if this is the case cellForItem returns nil, otherwise
            a UICollectionView cell instance is returned */
-        
-        
-        
-        
         guard let cell = collectionView.cellForItem(at: indexPath) as? ContactCollectionViewCell else {return }
         
         //The following animation code produces an ease in ease out when a user taps on a contact in the collection view
@@ -145,6 +175,7 @@ extension ViewController: UICollectionViewDelegate {
                 cell.contactImage.transform = CGAffineTransform.identity
             }, completion: nil)
         })
+
     }
 }
 
