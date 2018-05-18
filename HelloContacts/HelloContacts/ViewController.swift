@@ -50,6 +50,8 @@ class ViewController: UIViewController {
          */
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.recieveLongPress(gestureReconizer:)))
         collectionView.addGestureRecognizer(longPressRecognizer)
+        navigationItem.leftBarButtonItem = editButtonItem
+
     }
     
     //Responsible for fetching the contacts.
@@ -98,11 +100,39 @@ class ViewController: UIViewController {
         guard let tappedIndexPath = collectionView.indexPathForItem(at: tappedPoint),
             let tappedCell = collectionView.cellForItem(at: tappedIndexPath) else { return }
         
+        if isEditing {
+            reorderContact(withCell: tappedCell, atIndexPath: tappedIndexPath, gesture: gestureReconizer)
+        } else {
+            deleteContact(withCell: tappedCell, atIndexPath: tappedIndexPath)
+        }
+    }
+    
+    func reorderContact(withCell cell: UICollectionViewCell, atIndexPath indexPath: IndexPath, gesture: UILongPressGestureRecognizer) {
+        switch(gesture.state) {
+        case .began:
+            collectionView.beginInteractiveMovementForItem(at: indexPath)
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+                cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            }, completion: nil)
+            break
+        case .changed:
+            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: collectionView))
+            break
+        case .ended:
+            collectionView.endInteractiveMovement()
+            break
+        default:
+            collectionView.cancelInteractiveMovement()
+            break
+        }
+    }
+    
+    func deleteContact(withCell cell: UICollectionViewCell, atIndexPath indexPath: IndexPath) {
         let confirmDialog = UIAlertController(title: "Delete This Contact?", message: "Are You Sure You Want To Delete This Contact?", preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
-            self.contacts.remove(at: tappedIndexPath.row)
-            self.collectionView.deleteItems(at: [tappedIndexPath])
+            self.contacts.remove(at: indexPath.row)
+            self.collectionView.deleteItems(at: [indexPath])
         }
         
         let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
@@ -111,9 +141,37 @@ class ViewController: UIViewController {
         confirmDialog.addAction(cancelAction)
         
         if let popOver = confirmDialog.popoverPresentationController {
-            popOver.sourceView = tappedCell
+            popOver.sourceView = cell
+            
+            if let cell = cell as? ContactCollectionViewCell {
+                let imageFrame = cell.contactImage.frame
+                
+                let popOverX = imageFrame.origin.x + imageFrame.size.width / 2
+                let popOverY = imageFrame.origin.y + imageFrame.size.height / 2
+                
+                popOver.sourceRect = CGRect(x: popOverX, y: popOverY, width: 0, height: 0)
+            }
         }
+        
         present(confirmDialog, animated: true, completion: nil)
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        for visibleCell in collectionView.visibleCells {
+            guard let cell = visibleCell as? ContactCollectionViewCell else { continue }
+            
+            if editing {
+                UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+                    cell.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+                }, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+                    cell.backgroundColor = .clear
+                }, completion: nil)
+            }
+        }
     }
 }
 
@@ -137,6 +195,17 @@ extension ViewController: UICollectionViewDataSource {
             cell.contactImage.image = image
         }
         return cell
+    }
+    
+    //Tells the collection view whether it's okay for a certain item to be moved around
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //Responsilbe for updating the underlying data source based on the new cell order
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedContact = contacts.remove(at: sourceIndexPath.row)
+        contacts.insert(movedContact, at: destinationIndexPath.row)
     }
 }
 
