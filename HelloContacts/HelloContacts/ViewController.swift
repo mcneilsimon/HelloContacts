@@ -236,13 +236,18 @@ extension ViewController: UICollectionViewDelegate {
            a UICollectionView cell instance is returned */
         guard let cell = collectionView.cellForItem(at: indexPath) as? ContactCollectionViewCell else {return }
         
-        //The following animation code produces an ease in ease out when a user taps on a contact in the collection view
-        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+        /*The following animation code produces an ease in ease out when a user taps on a contact in the collection view
+          The second completion handler triggers the manual segue after the entire animation is complete. A manual segue is triggered by calling the
+          performSegue(withIdentifier: sender) method.
+         */
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
             cell.contactImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }, completion: { finished in
-            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn], animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
                 cell.contactImage.transform = CGAffineTransform.identity
-            }, completion: nil)
+            }, completion:{ [weak self] finished in
+                self?.performSegue(withIdentifier: "detailViewSegue", sender: self)
+            })
         })
 
     }

@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--ContactListController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HelloContacts" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ContactListController" id="BYZ-38-t0r" customClass="ViewController" customModule="HelloContacts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,11 +83,82 @@
                     <navigationItem key="navigationItem" id="jNG-UK-IJg"/>
                     <connections>
                         <outlet property="collectionView" destination="dee-Kj-Vk0" id="uvH-pO-UYY"/>
+                        <segue destination="UQX-5b-2DH" kind="show" identifier="detailViewSegue" id="zqu-q5-KME"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="762" y="116"/>
+        </scene>
+        <!--Contact Details-->
+        <scene sceneID="ygd-YT-ZJb">
+            <objects>
+                <viewController title="Contact Details" automaticallyAdjustsScrollViewInsets="NO" id="UQX-5b-2DH" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fzh-gB-JOx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmO-bY-Yn7">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dA8-kn-oY6">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="apm-hV-PHc">
+                                                <rect key="frame" x="127" y="62" width="120" height="120"/>
+                                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="HcS-nh-seI"/>
+                                                    <constraint firstAttribute="width" constant="240" id="LdY-39-qh8"/>
+                                                    <constraint firstAttribute="width" constant="120" id="kW8-Kq-mGd"/>
+                                                    <constraint firstAttribute="height" constant="240" id="v7f-68-pQ8"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="LdY-39-qh8"/>
+                                                        <exclude reference="v7f-68-pQ8"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="constraints">
+                                                        <exclude reference="HcS-nh-seI"/>
+                                                        <include reference="LdY-39-qh8"/>
+                                                        <exclude reference="kW8-Kq-mGd"/>
+                                                        <include reference="v7f-68-pQ8"/>
+                                                    </mask>
+                                                </variation>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="apm-hV-PHc" firstAttribute="centerX" secondItem="dA8-kn-oY6" secondAttribute="centerX" constant="-1" id="SPN-iY-KWZ"/>
+                                            <constraint firstItem="apm-hV-PHc" firstAttribute="top" secondItem="dA8-kn-oY6" secondAttribute="top" constant="62" id="ckJ-mU-WT2"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="dA8-kn-oY6" firstAttribute="leading" secondItem="pmO-bY-Yn7" secondAttribute="leading" id="0ee-UP-HGS"/>
+                                    <constraint firstAttribute="bottom" secondItem="dA8-kn-oY6" secondAttribute="bottom" id="XzN-Hw-Slc"/>
+                                    <constraint firstItem="dA8-kn-oY6" firstAttribute="centerY" secondItem="pmO-bY-Yn7" secondAttribute="centerY" id="ZPQ-t1-2CQ"/>
+                                    <constraint firstItem="dA8-kn-oY6" firstAttribute="centerX" secondItem="pmO-bY-Yn7" secondAttribute="centerX" id="bR0-a1-wm9"/>
+                                    <constraint firstAttribute="trailing" secondItem="dA8-kn-oY6" secondAttribute="trailing" id="nHz-Sp-5xc"/>
+                                    <constraint firstItem="dA8-kn-oY6" firstAttribute="top" secondItem="pmO-bY-Yn7" secondAttribute="top" id="nR4-U3-ZBe"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pmO-bY-Yn7" firstAttribute="trailing" secondItem="IpY-jg-kES" secondAttribute="trailing" id="CTc-E2-fq7"/>
+                            <constraint firstItem="pmO-bY-Yn7" firstAttribute="leading" secondItem="IpY-jg-kES" secondAttribute="leading" id="QjC-eg-GsN"/>
+                            <constraint firstItem="pmO-bY-Yn7" firstAttribute="bottom" secondItem="IpY-jg-kES" secondAttribute="bottom" id="oOk-Pn-KSo"/>
+                            <constraint firstItem="pmO-bY-Yn7" firstAttribute="top" secondItem="IpY-jg-kES" secondAttribute="top" id="rJo-qH-plA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IpY-jg-kES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y5X-TB-xAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1581.5999999999999" y="115.59220389805098"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0xY-Xt-XtZ">
