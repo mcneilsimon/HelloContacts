@@ -136,9 +136,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         switch(gesture.state) {
         case .began:
             collectionView.beginInteractiveMovementForItem(at: indexPath)
+            
+            let downAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
+                cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            }            
+            downAnimator.startAnimation()
+            /*
             UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
                 cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            }, completion: nil)
+            }, completion: nil)*/
+            
+            
+            
+            
             break
         case .changed:
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: collectionView))
@@ -253,20 +263,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
          a UICollectionView cell instance is returned */
         guard let cell = collectionView.cellForItem(at: indexPath) as? ContactCollectionViewCell else {return }
         
-        /*The following animation code produces an ease in ease out when a user taps on a contact in the collection view
-         The second completion handler triggers the manual segue after the entire animation is complete. A manual segue is triggered by calling the
-         performSegue(withIdentifier: sender) method.
-         */
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+        /*The following animation code produces an ease in ease out when a user taps on a contact in the collection view. downAnimator and
+          upAnimator declaration are the actual animation property. downAnimator and upAnimator.addCompletion() talk to each other by saying
+          what the next action should be when their animation is fnished They create the instances of UIViewPropertyAnimator. downAnimator.startAnimation()
+         starts the animation */
+        let downAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
             cell.contactImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        }, completion: { finished in
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
-                cell.contactImage.transform = CGAffineTransform.identity
-            }, completion:{ [weak self] finished in
-                self?.performSegue(withIdentifier: "detailViewSegue", sender: self)
-            })
-        })
+        }
         
+        let upAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
+            cell.contactImage.transform = CGAffineTransform.identity
+        }
+        
+        downAnimator.addCompletion { _ in
+            upAnimator.startAnimation()
+        }
+        
+        upAnimator.addCompletion { [weak self] _ in
+            self?.performSegue(withIdentifier: "detailViewSegue", sender: self)
+        }
+        
+        /* Need completion closure before calling this. Once this is called, the animation is started automatically. You can also delay the start of animation
+           by doing startAnimation(afterDelay:) */
+        downAnimator.startAnimation()
     }
 }
 
