@@ -15,6 +15,7 @@
 		2D7E6D0820A2168700B2545D /* HCContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0720A2168700B2545D /* HCContact.swift */; };
 		2D7E6D0A20A21BB900B2545D /* ContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */; };
 		2D7E6D0E20A237DD00B2545D /* ContactsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */; };
+		2DA11FAC20B7A1BD000E1A3F /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA11FAB20B7A1BD000E1A3F /* ContactDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2D7E6D0720A2168700B2545D /* HCContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCContact.swift; sourceTree = "<group>"; };
 		2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCollectionViewLayout.swift; sourceTree = "<group>"; };
+		2DA11FAB20B7A1BD000E1A3F /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				2D7E6CF720A2160800B2545D /* ViewController.swift */,
 				2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */,
 				2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */,
+				2DA11FAB20B7A1BD000E1A3F /* ContactDetailViewController.swift */,
 				2D7E6D0720A2168700B2545D /* HCContact.swift */,
 				2D7E6CF920A2160800B2545D /* Main.storyboard */,
 				2D7E6CFC20A2160C00B2545D /* Assets.xcassets */,
@@ -148,6 +151,7 @@
 				2D7E6D0E20A237DD00B2545D /* ContactsCollectionViewLayout.swift in Sources */,
 				2D7E6D0A20A21BB900B2545D /* ContactCollectionViewCell.swift in Sources */,
 				2D7E6D0820A2168700B2545D /* HCContact.swift in Sources */,
+				2DA11FAC20B7A1BD000E1A3F /* ContactDetailViewController.swift in Sources */,
 				2D7E6CF620A2160800B2545D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,10 +295,12 @@
 		2D7E6D0520A2160C00B2545D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKB32CN29K;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				INFOPLIST_FILE = HelloContacts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -311,10 +317,12 @@
 		2D7E6D0620A2160C00B2545D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKB32CN29K;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				INFOPLIST_FILE = HelloContacts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

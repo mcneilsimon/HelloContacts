@@ -37,6 +37,41 @@ class HCContact {
             contactImage = UIImage(data: imageData)
         }
     }
+    
+    /* The ?? is called a ni coalescing operator. It used to return a retrieved value or a placeholder string
+       If the retrieved value doesn't exist, the placeholder is used instead.
+     */
+    var emailAddress: String {
+        return String(contact.emailAddresses.first?.value ?? "--")
+    }
+    
+    /* The next phoneNumbers and postalAddresses are arrays of NSValue objects. Since we're only interested in the
+       first item available, we use the first property that's defined on the array. When available it returns
+       the first element of the array */
+    var phoneNumber: String {
+        return String(contact.phoneNumbers.first?.value.stringValue ?? "--")
+    }
+    
+    /* For the address the code is a little more complex. An address has multiple fields, so we extract the ones
+      we need, with the same technique that's used for the phone number. Then a string is returned with both values
+      seperated by a comma. */
+    var address: String {
+        let street = contact.postalAddresses.first?.value.street ?? "--"
+        let city = contact.postalAddresses.first?.value.city ?? "--"
+        return "\(street)-\(city)"
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
