@@ -9,11 +9,18 @@
 import UIKit
 import Contacts
 
-class ViewController: UIViewController {
+/* UICollectionView Delegate Flow Layout:
+    -This delegate protocol allows you to implement a few customization points for the layout.
+     For instance, you can dynamically calculate cell sizes or manipulate the cell spacing. */
+
+
+
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var contacts = [HCContact]()
     @IBOutlet weak var collectionView: UICollectionView!
     
+    //MARK: override func
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,7 +58,22 @@ class ViewController: UIViewController {
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.recieveLongPress(gestureReconizer:)))
         collectionView.addGestureRecognizer(longPressRecognizer)
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        
+        //checks the current trait collection so that the environment supports 3D touch
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: collectionView)
+        }
 
+    }
+    
+    //Passes data from the overview to the contact detail page.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let contactDetailVC = segue.destination as? ContactDetailViewController, segue.identifier == "detailViewSegue",
+            let selectedIndex = collectionView.indexPathsForSelectedItems?.first {
+            contactDetailVC.contactInfo = contacts[selectedIndex.row]
+        }
+        //indexPathForSelectedItems get the total amount of selected items, in this case it will only be one.
     }
     
     //Responsible for fetching the contacts.
@@ -62,7 +84,10 @@ class ViewController: UIViewController {
             CNContactGivenNameKey as CNKeyDescriptor, //gets contact name
             CNContactFamilyNameKey as CNKeyDescriptor, //gets contact family name
             CNContactImageDataKey as CNKeyDescriptor, //gets contacts image.
-            CNContactImageDataAvailableKey as CNKeyDescriptor //checks if contact image is available
+            CNContactImageDataAvailableKey as CNKeyDescriptor, //checks if contact image is available
+            CNContactEmailAddressesKey as CNKeyDescriptor, //gets contacts email
+            CNContactPhoneNumbersKey as CNKeyDescriptor, //gets phoneNumber
+            CNContactPostalAddressesKey as CNKeyDescriptor //gets contacts address
         ]
         
         //gets all types of contacts
@@ -156,6 +181,7 @@ class ViewController: UIViewController {
         present(confirmDialog, animated: true, completion: nil)
     }
     
+    //Changes the background color of the cells when collection view is in edit mode
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
@@ -173,10 +199,8 @@ class ViewController: UIViewController {
             }
         }
     }
-}
-
-extension ViewController: UICollectionViewDataSource {
     
+    //Gets the count of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contacts.count
     }
@@ -207,11 +231,6 @@ extension ViewController: UICollectionViewDataSource {
         let movedContact = contacts.remove(at: sourceIndexPath.row)
         contacts.insert(movedContact, at: destinationIndexPath.row)
     }
-}
-
-/* This delegate protocol allows you to implement a few customization points for the layout.
- For instance, you can dynamically calculate cell sizes or manipulate the cell spacing. */
-extension ViewController: UICollectionViewDelegateFlowLayout {
     
     /* Delegate method that we need to implement in order to provide dynamic cell sizes. Simply return a cell size width and height.
      */
@@ -219,26 +238,24 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 110, height: 160)
     }
     
-    //creates the spacing between cells
+    //creates the spacing between cells, this sets it so that each collection view will display 3 cells no matter what screen size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         let cellsPerRow: CGFloat = 3
         let widthReminder = (collectionView.bounds.width - (cellsPerRow-1)).truncatingRemainder(dividingBy: cellsPerRow) / (cellsPerRow-1)
         return 1 + widthReminder
     }
     
-}
-
-extension ViewController: UICollectionViewDelegate {
+    //when user taps on a cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         /* First thing to note is that we can ask UICollectionView for a cell based on the IndexPath. The cellForItem method returns an
-           optional UICollectionViewCell. There might not be a cell at the requested IndexPath; if this is the case cellForItem returns nil, otherwise
-           a UICollectionView cell instance is returned */
+         optional UICollectionViewCell. There might not be a cell at the requested IndexPath; if this is the case cellForItem returns nil, otherwise
+         a UICollectionView cell instance is returned */
         guard let cell = collectionView.cellForItem(at: indexPath) as? ContactCollectionViewCell else {return }
         
         /*The following animation code produces an ease in ease out when a user taps on a contact in the collection view
-          The second completion handler triggers the manual segue after the entire animation is complete. A manual segue is triggered by calling the
-          performSegue(withIdentifier: sender) method.
+         The second completion handler triggers the manual segue after the entire animation is complete. A manual segue is triggered by calling the
+         performSegue(withIdentifier: sender) method.
          */
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
             cell.contactImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -249,11 +266,34 @@ extension ViewController: UICollectionViewDelegate {
                 self?.performSegue(withIdentifier: "detailViewSegue", sender: self)
             })
         })
-
+        
     }
 }
 
-
+//MARK: 3D touch protocols
+extension ViewController: UIViewControllerPreviewingDelegate {
+    
+    /* Responsible for providing the previewed view controller. This is done by figuring out the tapped item in the collectionView. Next a
+       view controller is obtained through the storyoard by using the identifier. Then a vc is assigned a contact and returned for previewing. */
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let tappedIndexPath = collectionView.indexPathForItem(at: location) else {return nil}
+        
+        let contact = contacts[tappedIndexPath.row]
+        
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "ContactDetailViewController") as? ContactDetailViewController else { return nil}
+        
+        viewController.contactInfo = contact
+        
+        return viewController
+    }
+    
+    //Simply tells the navigation controller to present the view controller that was previewed. 
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.show(viewControllerToCommit, sender: self)
+    }
+    
+    
+}
 
 
 
