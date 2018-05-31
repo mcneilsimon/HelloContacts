@@ -82,7 +82,14 @@
                             <constraint firstAttribute="trailing" secondItem="dee-Kj-Vk0" secondAttribute="trailing" id="rHX-qF-sPJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jNG-UK-IJg"/>
+                    <navigationItem key="navigationItem" id="jNG-UK-IJg">
+                        <barButtonItem key="rightBarButtonItem" title="Show Modal" id="NLD-xB-a7J">
+                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-1"/>
+                            <connections>
+                                <segue destination="HHL-eb-Hzn" kind="presentation" id="kQH-iy-ToU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="dee-Kj-Vk0" id="uvH-pO-UYY"/>
                         <segue destination="UQX-5b-2DH" kind="show" identifier="detailViewSegue" id="zqu-q5-KME"/>
@@ -300,7 +307,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y5X-TB-xAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1718.840579710145" y="-114.1304347826087"/>
+            <point key="canvasLocation" x="1860" y="116"/>
+        </scene>
+        <!--Custom Presented View Controller-->
+        <scene sceneID="dQU-bz-gSU">
+            <objects>
+                <viewController id="HHL-eb-Hzn" customClass="CustomPresentedViewController" customModule="HelloContacts" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uoV-Fq-z7p"/>
+                        <viewControllerLayoutGuide type="bottom" id="1XG-or-hFd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KYm-VN-Pvs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.83095308450198502" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RwR-CP-LXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="761" y="812"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0xY-Xt-XtZ">

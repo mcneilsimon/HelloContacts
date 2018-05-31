@@ -141,14 +141,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             }            
             downAnimator.startAnimation()
-            /*
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
-                cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            }, completion: nil)*/
-            
-            
-            
-            
             break
         case .changed:
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: collectionView))

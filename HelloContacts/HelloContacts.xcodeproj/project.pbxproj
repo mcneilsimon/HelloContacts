@@ -16,6 +16,8 @@
 		2D7E6D0A20A21BB900B2545D /* ContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */; };
 		2D7E6D0E20A237DD00B2545D /* ContactsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */; };
 		2DA11FAC20B7A1BD000E1A3F /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA11FAB20B7A1BD000E1A3F /* ContactDetailViewController.swift */; };
+		2DFEB05520C05B310097C6D6 /* CustomPresentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFEB05420C05B310097C6D6 /* CustomPresentedViewController.swift */; };
+		2DFEB05720C05DC30097C6D6 /* CustomModalShowAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFEB05620C05DC30097C6D6 /* CustomModalShowAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		2DA11FAB20B7A1BD000E1A3F /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
+		2DFEB05420C05B310097C6D6 /* CustomPresentedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentedViewController.swift; sourceTree = "<group>"; };
+		2DFEB05620C05DC30097C6D6 /* CustomModalShowAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModalShowAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				2D7E6D0920A21BB900B2545D /* ContactCollectionViewCell.swift */,
 				2D7E6D0D20A237DD00B2545D /* ContactsCollectionViewLayout.swift */,
 				2DA11FAB20B7A1BD000E1A3F /* ContactDetailViewController.swift */,
+				2DFEB05420C05B310097C6D6 /* CustomPresentedViewController.swift */,
+				2DFEB05620C05DC30097C6D6 /* CustomModalShowAnimator.swift */,
 				2D7E6D0720A2168700B2545D /* HCContact.swift */,
 				2D7E6CF920A2160800B2545D /* Main.storyboard */,
 				2D7E6CFC20A2160C00B2545D /* Assets.xcassets */,
@@ -150,6 +156,8 @@
 				2D7E6CF820A2160800B2545D /* ViewController.swift in Sources */,
 				2D7E6D0E20A237DD00B2545D /* ContactsCollectionViewLayout.swift in Sources */,
 				2D7E6D0A20A21BB900B2545D /* ContactCollectionViewCell.swift in Sources */,
+				2DFEB05520C05B310097C6D6 /* CustomPresentedViewController.swift in Sources */,
+				2DFEB05720C05DC30097C6D6 /* CustomModalShowAnimator.swift in Sources */,
 				2D7E6D0820A2168700B2545D /* HCContact.swift in Sources */,
 				2DA11FAC20B7A1BD000E1A3F /* ContactDetailViewController.swift in Sources */,
 				2D7E6CF620A2160800B2545D /* AppDelegate.swift in Sources */,
