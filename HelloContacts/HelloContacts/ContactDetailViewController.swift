@@ -21,8 +21,6 @@ class ContactDetailViewController: UIViewController {
     var drawerPanStart: CGFloat = 0
     var animator: UIViewPropertyAnimator!
 
-    
-    
     var contactInfo: HCContact?
     
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
@@ -41,6 +39,9 @@ class ContactDetailViewController: UIViewController {
         
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanOnDrawer(recognizer:)))
         drawer.addGestureRecognizer(panRecognizer)
+        
+        view.clipsToBounds = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

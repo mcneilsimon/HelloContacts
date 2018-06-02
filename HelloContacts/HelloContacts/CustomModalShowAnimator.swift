@@ -21,7 +21,7 @@ class CustomModalShowAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     //The time interval that we want are transition to last
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 1
+        return 0.5
     }
     
     /*  This methods purpose is to take care of the actual animation for the custom transition. Our implementation will take the target view controller animate its view from the top down to its final position.
@@ -44,7 +44,7 @@ class CustomModalShowAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         //the next three lines of code is to set up the intial frame for the target view controller. This is the position for which the animation will start
         var transform = CGAffineTransform.identity
         transform = transform.concatenating(CGAffineTransform(scaleX: 0, y: 1))
-        transform = transform.concatenating(CGAffineTransform(translationX: 0, y: -20))
+        transform = transform.concatenating(CGAffineTransform(translationX: 0, y: 0))
         
         toViewController.view.transform = transform
         toViewController.view.alpha = 0

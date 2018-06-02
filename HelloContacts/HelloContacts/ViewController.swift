@@ -18,6 +18,7 @@ import Contacts
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var contacts = [HCContact]()
+    var navigationDelegate: NavigationDelegate?
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: override func
@@ -64,6 +65,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         //checks the current trait collection so that the environment supports 3D touch
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: collectionView)
+        }
+        
+        if let navigationController = self.navigationController {
+            navigationDelegate = NavigationDelegate(navigationController: navigationController)
+            navigationController.delegate = navigationDelegate
         }
 
     }
