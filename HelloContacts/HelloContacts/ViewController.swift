@@ -38,6 +38,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         //check if notDetermined meaning we havn't asked the user permission yet.
         if authorizationStatus == .notDetermined {
+            
             /* When asking for permission we make use of a completion handler (closure).
              Completion handlers are used when you perform a task that could take a while and is performed parallel to
              the rest of the your application, so the user interface can continue running without waiting for the result. */

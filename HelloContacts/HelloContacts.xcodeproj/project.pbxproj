@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D764C5A20C2146C002CA6A8 /* CustomModalHideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D764C5920C2146C002CA6A8 /* CustomModalHideAnimator.swift */; };
 		2D7E6CF620A2160800B2545D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6CF520A2160800B2545D /* AppDelegate.swift */; };
 		2D7E6CF820A2160800B2545D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E6CF720A2160800B2545D /* ViewController.swift */; };
 		2D7E6CFB20A2160800B2545D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D7E6CF920A2160800B2545D /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D764C5920C2146C002CA6A8 /* CustomModalHideAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModalHideAnimator.swift; sourceTree = "<group>"; };
 		2D7E6CF220A2160800B2545D /* HelloContacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloContacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D7E6CF520A2160800B2545D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D7E6CF720A2160800B2545D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				2DA11FAB20B7A1BD000E1A3F /* ContactDetailViewController.swift */,
 				2DFEB05420C05B310097C6D6 /* CustomPresentedViewController.swift */,
 				2DFEB05620C05DC30097C6D6 /* CustomModalShowAnimator.swift */,
+				2D764C5920C2146C002CA6A8 /* CustomModalHideAnimator.swift */,
 				2D7E6D0720A2168700B2545D /* HCContact.swift */,
 				2D7E6CF920A2160800B2545D /* Main.storyboard */,
 				2D7E6CFC20A2160C00B2545D /* Assets.xcassets */,
@@ -160,6 +163,7 @@
 				2DFEB05720C05DC30097C6D6 /* CustomModalShowAnimator.swift in Sources */,
 				2D7E6D0820A2168700B2545D /* HCContact.swift in Sources */,
 				2DA11FAC20B7A1BD000E1A3F /* ContactDetailViewController.swift in Sources */,
+				2D764C5A20C2146C002CA6A8 /* CustomModalHideAnimator.swift in Sources */,
 				2D7E6CF620A2160800B2545D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,26 +10,32 @@ import UIKit
 
 class CustomPresentedViewController: UIViewController {
 
+    var hideAnimator: CustomModalHideAnimator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        transitioningDelegate = self
+        //creates an instance of CustomModalHideAnimator and binds the view controller to it by passing it to the init
+        hideAnimator = CustomModalHideAnimator(viewController: self)
     }
     
+}
 
-    /*
-    // MARK: - Navigation
+//This code assigns the view controller as its own transition delegate
+extension CustomPresentedViewController: UIViewControllerTransitioningDelegate {
+    
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        //Returns the animation controller you created before. This nicely seperates code and keeps files clean.
+        return CustomModalShowAnimator()
     }
-    */
-
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return hideAnimator
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return hideAnimator
+    }
 }
