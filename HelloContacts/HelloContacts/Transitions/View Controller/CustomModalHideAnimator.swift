@@ -59,7 +59,7 @@ class CustomModalHideAnimator: UIPercentDrivenInteractiveTransition, UIViewContr
     /* The next two functions are the exact ones you see in CustomModalShowAnimator, but the code inside them is just the reverse.
        So the animation knows to do the reverse of it self when the user swipes left */
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 1
+        return 0.7
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

@@ -106,20 +106,20 @@ extension ContactDetailViewController {
         
         animator = UIViewPropertyAnimator(duration: 0.8, timingParameters: spring)
         
-        animator.addAnimations { [unowned self] in
-            if self.isDrawerOpen {
+        animator.addAnimations { [weak self] in
+            if (self?.isDrawerOpen)! {
                 //original state
-                self.drawer.transform = CGAffineTransform.identity
+                self?.drawer.transform = CGAffineTransform.identity
             } else {
                 //sets the height of the drawer when you tap on it.
-                self.drawer.transform = CGAffineTransform(translationX: 0, y: -285)
+                self?.drawer.transform = CGAffineTransform(translationX: 0, y: -285)
             }
         }
         
-        animator.addCompletion { [unowned self] _ in
-            self.animator = nil
+        animator.addCompletion { [weak self] _ in
+            self?.animator = nil
             //isDrawer back to false
-            self.isDrawerOpen = !(self.drawer.transform == CGAffineTransform.identity)
+            self?.isDrawerOpen = !(self?.drawer.transform == CGAffineTransform.identity)
         }
     }
     

@@ -262,29 +262,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
          a UICollectionView cell instance is returned */
         guard let cell = collectionView.cellForItem(at: indexPath) as? ContactCollectionViewCell else {return }
         
-        /*The following animation code produces an ease in ease out when a user taps on a contact in the collection view. downAnimator and
-          upAnimator declaration are the actual animation property. downAnimator and upAnimator.addCompletion() talk to each other by saying
-          what the next action should be when their animation is fnished They create the instances of UIViewPropertyAnimator. downAnimator.startAnimation()
-         starts the animation */
-        let downAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
-            cell.contactImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        //Calls are helper value type BounceAnimationHelper
+        let onBounceComplete: BounceAnimationHelper.BounceAnimationComplete = { [unowned self] position in
+            self.performSegue(withIdentifier: "detailViewSegue", sender: self)
         }
         
-        let upAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
-            cell.contactImage.transform = CGAffineTransform.identity
-        }
-        
-        downAnimator.addCompletion { _ in
-            upAnimator.startAnimation()
-        }
-        
-        upAnimator.addCompletion { [weak self] _ in
-            self?.performSegue(withIdentifier: "detailViewSegue", sender: self)
-        }
-        
-        /* Need completion closure before calling this. Once this is called, the animation is started automatically. You can also delay the start of animation
-           by doing startAnimation(afterDelay:) */
-        downAnimator.startAnimation()
+        let bounce = BounceAnimationHelper(targetView: cell.contactImage, onComplete: onBounceComplete)
+        bounce.startAnimation() 
     }
 }
 
